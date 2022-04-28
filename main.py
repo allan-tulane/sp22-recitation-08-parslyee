@@ -17,8 +17,15 @@ def reachable(graph, start_node):
     result = set([start_node])
     frontier = set([start_node])
     while len(frontier) != 0:
-        ###TODO
-        pass
+        visited = frontier.pop()
+        
+        for visited not in result:
+            result.add(visited)
+        
+        next = graph[visitedNode]
+        next = next.difference(result)
+        frontier = frontier.union(next)
+        
     return result
 
 def test_reachable():
@@ -33,8 +40,11 @@ def test_reachable():
 
 
 def connected(graph):
-    ### TODO
-    pass
+    allNodes = len(graph)
+    
+    nodesConnected = reachable(graph, list(graph.keys())[0])
+    
+    return len(nodesConnected) = allNodes
 
 def test_connected():
     graph = make_undirected_graph([('A', 'B'), ('B', 'C'), ('C', 'D'), ('D', 'B')])
@@ -49,8 +59,17 @@ def n_components(graph):
     Returns:
       the number of connected components in an undirected graph
     """
-    ### TODO
-    pass
+    result = []
+    frontier = (set(list(graph.keys)))
+    
+    while len(frontier) != 0:
+        anode = frontier.pop()
+        conNode = reachable(graph, node)
+        frontier = frontier - connected
+        
+        result.append(connected)
+    return len(result)
+    
 
 def test_n_components():
     graph = make_undirected_graph([('A', 'B'), ('B', 'C'), ('C', 'D'), ('D', 'B')])
@@ -58,3 +77,12 @@ def test_n_components():
 
     graph = make_undirected_graph([('A', 'B'), ('B', 'C'), ('C', 'D'), ('D', 'B'), ('E', 'F'), ('F', 'G')])
     assert n_components(graph) == 2
+    
+    
+    graph = graph = make_undirected_graph([('A', 'B'), ('B', 'C'), ('C', 'D'), ('D', 'B'), ('E', 'F'), ('F', 'G')])
+    
+graph = make_undirected_graph([('A', 'B'), ('B', 'C'), ('C', 'D'), ('D', 'B'), ('E', 'F'), ('F', 'G')])
+print("graph: ", graph)
+print("reachable test: ", reachable(graph, 'A')))
+print("connected test: ", connected(graph))
+print("n_components test: ", n_components(graph))
